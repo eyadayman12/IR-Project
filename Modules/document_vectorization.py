@@ -25,7 +25,7 @@ def w_tfLog(document_vectorization_df):
         for feature in document_vectorization_df.columns:
             tf = document_vectorization_df.loc[index,feature]
             if tf != 0:
-                w_tfLog_df.loc[index,feature] = tf*(1+log10(tf))
+                w_tfLog_df.loc[index,feature] = (1+log10(tf))
                 
     return w_tfLog_df
         
