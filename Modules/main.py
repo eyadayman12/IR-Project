@@ -64,11 +64,11 @@ print("\n\n")
 
 # Get Results of the Query
 
-op = input("Want to search for a Phrase Query? (Y/N)").lower()
+op = input("Want to search for a Phrase Query? ").lower()
 
 while op == 'y' or op == 'yes':
 
-    phraseQuery_tokenized, phraseQuery_results_df=phrase_query_results.display_phraseQuery_df_results(df_idf_df, tfidf_df, normalized_tfidf)
+    phraseQuery_tokenized, phraseQuery_results_df=phrase_query_results.display_phraseQuery_df_results(df_idf_df, document_vectroization_df)
     print("\n")
     if phraseQuery_results_df.empty:
         print("No Matched Terms")
@@ -80,13 +80,21 @@ while op == 'y' or op == 'yes':
     
     matched_docs_terms = phrase_query_results.get_matched_documents(pos_index, phraseQuery_tokenized)
     match_docs_pq = phrase_query_results.matched_phrase_query(matched_docs_terms, phraseQuery_tokenized, pos_index)
-    phrase_query_results.display_matched_documents(match_docs_pq, text_docs)
+    
+    print("\n")
+    product_df = phrase_query_results.product_df(normalized_tfidf, phraseQuery_tokenized, phraseQuery_results_df, match_docs_pq)
+    if product_df.empty:
+        pass
+    else:
+        print(product_df)
+    print("\n")
+    dic = phrase_query_results.get_similiarty(product_df)
     print("\n")
 
     # Cosine Similiarity
-    phrase_query_results.get_cosine_similarity_between_query_and_docs(phraseQuery_tokenized, match_docs_pq, text_docs)
-    
-    op = input("Want to search for a Phrase Query? (Y/N)").lower()
+    phrase_query_results.display_matched_documents(dic, match_docs_pq, text_docs)
+
+    op = input("Want to search for a Phrase Query? ").lower()
 
 
 
