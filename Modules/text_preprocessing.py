@@ -66,7 +66,7 @@ def remove_stopwords(tokenized_documents):
         filtered_sentence = []
         cleaned_sentence = ""
         for word in doc:
-            if word not in stop_words or word == "in" or word == "to":
+            if word not in stop_words or word == "in" or word == "to" or word == "where":
                 cleaned_sentence = cleaned_sentence + word + ' '
                 filtered_sentence.append(word)
         documents_tokinzed_list.append(filtered_sentence)
